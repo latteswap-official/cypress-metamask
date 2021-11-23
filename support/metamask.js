@@ -172,38 +172,40 @@ module.exports = {
     await puppeteer.waitAndClick(
       mainPageElements.networksPage.addNetworkButton,
     );
-    await puppeteer.waitAndType(
-      mainPageElements.addNetworkPage.networkNameInput,
+    await puppeteer.waitXpathAndType(
+      mainPageElements.addNetworkPage.networkNameInputXpath,
       network.networkName,
     );
-    await puppeteer.waitAndType(
-      mainPageElements.addNetworkPage.rpcUrlInput,
+    await puppeteer.waitXpathAndType(
+      mainPageElements.addNetworkPage.rpcUrlInputXpath,
       network.rpcUrl,
     );
-    await puppeteer.waitAndType(
-      mainPageElements.addNetworkPage.chainIdInput,
+    await puppeteer.waitXpathAndType(
+      mainPageElements.addNetworkPage.chainIdInputXpath,
       network.chainId,
     );
 
     if (network.symbol) {
-      await puppeteer.waitAndType(
-        mainPageElements.addNetworkPage.symbolInput,
+      await puppeteer.waitXpathAndType(
+        mainPageElements.addNetworkPage.symbolInputXpath,
         network.symbol,
       );
     }
 
     if (network.blockExplorer) {
-      await puppeteer.waitAndType(
-        mainPageElements.addNetworkPage.blockExplorerInput,
+      await puppeteer.waitXpathAndType(
+        mainPageElements.addNetworkPage.blockExplorerInputXpath,
         network.blockExplorer,
       );
     }
-    await puppeteer.waitAndClick(mainPageElements.addNetworkPage.saveButton);
+    await puppeteer.waitXpathAndClick(mainPageElements.addNetworkPage.saveButtonXpath);
     await puppeteer.waitAndClick(mainPageElements.networksPage.closeButton);
+    console.log("\nAfter click close button")
     await puppeteer.waitForText(
       mainPageElements.networkSwitcher.networkName,
       network.networkName,
     );
+    console.log("\nAfter wait for text")
     return true;
   },
   async acceptAccess() {
@@ -221,21 +223,21 @@ module.exports = {
     return true;
   },
   async confirmTransaction() {
-    const isKovanTestnet = getNetwork().networkName === 'kovan';
+    // const isKovanTestnet = getNetwork().networkName === 'kovan';
     await puppeteer.metamaskWindow().waitForTimeout(3000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
-    const currentGasFee = await puppeteer.waitAndGetValue(
-      confirmPageElements.gasFeeInput,
-      notificationPage,
-    );
-    const newGasFee = isKovanTestnet
-      ? '1'
-      : (Number(currentGasFee) + 10).toString();
-    await puppeteer.waitAndSetValue(
-      newGasFee,
-      confirmPageElements.gasFeeInput,
-      notificationPage,
-    );
+    // const currentGasFee = await puppeteer.waitAndGetValue(
+    //   confirmPageElements.gasFeeInput,
+    //   notificationPage,
+    // );
+    // const newGasFee = isKovanTestnet
+    //   ? '1'
+    //   : (Number(currentGasFee) + 10).toString();
+    // await puppeteer.waitAndSetValue(
+    //   newGasFee,
+    //   confirmPageElements.gasFeeInput,
+    //   notificationPage,
+    // );
     // metamask reloads popup after changing a fee, you have to wait for this event otherwise transaction will fail
     await puppeteer.metamaskWindow().waitForTimeout(3000);
     await puppeteer.waitAndClick(
@@ -256,8 +258,11 @@ module.exports = {
     return true;
   },
   async getWalletAddress() {
+    console.log("\ngetWalletAddress")
     await puppeteer.waitAndClick(mainPageElements.options.button);
+    console.log("\nclick option.button")
     await puppeteer.waitAndClick(mainPageElements.options.accountDetailsButton);
+    console.log("\nclick option.accountDetailsButton")
     walletAddress = await puppeteer.waitAndGetValue(
       mainPageElements.accountModal.walletAddressInput,
     );
@@ -279,17 +284,21 @@ module.exports = {
       await module.exports.confirmWelcomePage();
       await module.exports.importWallet(secretWords, password);
       if (isCustomNetwork) {
+        console.log("\naddNetwork new custom network");
         await module.exports.addNetwork(network);
       } else {
+        console.log("\nchangeNetwork");
         await module.exports.changeNetwork(network);
       }
       walletAddress = await module.exports.getWalletAddress();
       await puppeteer.switchToCypressWindow();
+      console.log("\nadd network done and switchToCypressWindow");
       return true;
     } else {
       await module.exports.unlock(password);
       walletAddress = await module.exports.getWalletAddress();
       await puppeteer.switchToCypressWindow();
+      console.log("\nunlock pwd and switchToCypressWindow");
       return true;
     }
   },

@@ -33,11 +33,17 @@ const networksPage = {
 
 const addNetworkPage = {
   networkNameInput: '#network-name',
+  networkNameInputXpath: '//div[@class="form-field"and contains(.,"Network Name")]//input',
   rpcUrlInput: '#rpc-url',
+  rpcUrlInputXpath: '//div[@class="form-field"and contains(.,"New RPC URL")]//input',
   chainIdInput: '#chainId',
+  chainIdInputXpath: '//div[@class="form-field"and contains(.,"Chain ID")]//input',
   symbolInput: '#network-ticker',
+  symbolInputXpath: '//div[@class="form-field"and contains(.,"Currency Symbol")]//input',
   blockExplorerInput: '#block-explorer-url',
+  blockExplorerInputXpath: '//div[@class="form-field"and contains(.,"Block Explorer URL")]//input',
   saveButton: '.network-form__footer button:nth-child(2)',
+  saveButtonXpath: '//button[contains(.,"Save")]'
 };
 
 const options = {
@@ -46,7 +52,7 @@ const options = {
 };
 
 const accountModal = {
-  walletAddressInput: '.account-modal input',
+  walletAddressInput: '.qr-code__address',
   closeButton: '.account-modal__close',
 };
 
