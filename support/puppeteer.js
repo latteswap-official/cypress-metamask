@@ -112,6 +112,18 @@ module.exports = {
     const element = await page.$(selector);
     await element.type(value);
   },
+
+  waitXpathAndType: async (xpath, value, page = metamaskWindow) => {
+    const element = await page.waitForXPath(xpath, { visible: true } );
+    await element.type(value);
+ 
+  },
+  waitXpathAndClick: async (xpath, page = metamaskWindow) => {
+    const element = await page.waitForXPath(xpath, { visible: true } );
+    await element.click();
+ 
+  },
+
   async waitAndGetValue(selector, page = metamaskWindow) {
     await module.exports.waitFor(selector, page);
     const element = await page.$(selector);
@@ -129,9 +141,15 @@ module.exports = {
     await page.keyboard.type(text);
   },
   async waitForText(selector, text, page = metamaskWindow) {
+    console.log("\nwaitForText funtion");
     await module.exports.waitFor(selector, page);
-    await page.waitForFunction(
-      `document.querySelector('${selector}').innerText.toLowerCase().includes('${text}')`,
+    console.log("\nafter waitFor");
+    console.log("\nselector:",selector,"\ntext:",text)
+    await page.waitForFunction(   
+      `document.querySelector('${selector}').innerText.includes('${text}')`,
     );
+    //  //   'document.querySelector("${selector}").innerText.includes("${text}")'
+    // // await page.waitForXPath("//span[contains(.,'text')]");
+    // console.log("\nafter waitForFunction");
   },
 };
