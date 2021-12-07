@@ -86,7 +86,9 @@ module.exports = {
   },
 
   async waitAndClick(selector, page = metamaskWindow) {
+    console.log("\nlocator:",selector);
     await module.exports.waitFor(selector, page);
+    
     await page.evaluate(
       selector => document.querySelector(selector).click(),
       selector,

@@ -210,15 +210,18 @@ module.exports = {
   },
   async acceptAccess() {
     await puppeteer.metamaskWindow().waitForTimeout(3000);
+    console.log("\nacceptAccess 1");
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     await puppeteer.waitAndClick(
-      notificationPageElements.nextButton,
+      confirmPageElements.confirmButton,
       notificationPage,
     );
-    await puppeteer.waitAndClick(
-      permissionsPageElements.connectButton,
-      notificationPage,
-    );
+    console.log("\nacceptAccess 2");
+    // await puppeteer.waitAndClick(
+    //   permissionsPageElements.connectButton,
+    //   notificationPage,
+    // );
+    console.log("\nacceptAccess 3");
     await puppeteer.metamaskWindow().waitForTimeout(3000);
     return true;
   },

@@ -5,7 +5,7 @@ const permissionsPage = '.permissions-connect';
 const connectButton = `${permissionsPage} .permission-approval-container__footers button:nth-child(2)`;
 
 const confirmPageHeader = `${notificationPage} .confirm-page-container-header`;
-const confirmPageContent = `${notificationPage} .confirm-page-container-content`;
+const confirmPageContent = `${notificationPage} .page-container__footer`;
 const confirmPageGasFeeSection = `${confirmPageContent} .confirm-page-container-content__gas-fee`;
 const gasFeeLabel = `${confirmPageGasFeeSection} .currency-display-component__text`;
 const gasFeeInput = `${confirmPageGasFeeSection} .advanced-gas-inputs__gas-edit-row:nth-child(1) .advanced-gas-inputs__gas-edit-row__input`;
