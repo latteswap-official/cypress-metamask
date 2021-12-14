@@ -13,6 +13,7 @@ const gasLimitInput = `${confirmPageGasFeeSection} .advanced-gas-inputs__gas-edi
 const totalLabel = `${confirmPageContent} div:nth-child(2) > .confirm-detail-row .currency-display-component__text`;
 const rejectButton = `${confirmPageContent} [data-testid="page-container-footer-cancel"]`;
 const confirmButton = `${confirmPageContent} [data-testid="page-container-footer-next"]`;
+const confirmXpathButton = '//button[(.="Next")]'
 
 module.exports.notificationPageElements = {
   notificationPage,
@@ -35,4 +36,5 @@ module.exports.confirmPageElements = {
   totalLabel,
   rejectButton,
   confirmButton,
+  confirmXpathButton
 };
