@@ -97,7 +97,7 @@ module.exports = (on, config) => {
     async importMetaMaskWalletUsingPrivateKey({ key }) {
       await puppeteer.switchToMetamaskWindow();
       const imported = await metamask.importMetaMaskWalletUsingPrivateKey(key);
-      await puppeteer.switchToMetamaskWindow();
+      await puppeteer.switchToCypressWindow();
       return imported
     },
     
