@@ -5,6 +5,12 @@ let puppeteerBrowser;
 let mainWindow;
 let metamaskWindow;
 
+function delay(time) {
+  return new Promise(function(resolve) { 
+      setTimeout(resolve, time)
+  });
+}
+
 module.exports = {
   puppeteerBrowser() {
     return puppeteerBrowser;
@@ -28,7 +34,13 @@ module.exports = {
     return puppeteerBrowser.isConnected();
   },
   async assignWindows() {
+    console.log('before waiting');
+    await delay(3000);
+    console.log('after waiting');
     let pages = await puppeteerBrowser.pages();
+    console.log('before waiting 2');
+    await delay(3000);
+    console.log('after waiting 2');
     for (const page of pages) {
       if (page.url().includes('integration')) {
         console.log("\nmainWindow = page\n");
