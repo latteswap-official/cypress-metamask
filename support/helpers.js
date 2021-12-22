@@ -78,12 +78,14 @@ module.exports = {
     const release = await module.exports.getMetamaskReleases(version);
     const downloadsDirectory = path.resolve(__dirname, 'downloads');
     if (!fs.existsSync(downloadsDirectory)) {
+      console.log("Metamask version not exits in dir");
       fs.mkdirSync(downloadsDirectory);
     }
     const downloadDestination = path.join(downloadsDirectory, release.filename);
     await module.exports.download(release.downloadUrl, downloadDestination);
     const metamaskDirectory = path.join(downloadsDirectory, 'metamask');
     await module.exports.extract(downloadDestination, metamaskDirectory);
+    console.log("\nmetamaskDirectory:",metamaskDirectory);
     return metamaskDirectory;
   },
 };

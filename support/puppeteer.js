@@ -31,8 +31,10 @@ module.exports = {
     let pages = await puppeteerBrowser.pages();
     for (const page of pages) {
       if (page.url().includes('integration')) {
+        console.log("\nmainWindow = page\n");
         mainWindow = page;
       } else if (page.url().includes('extension')) {
+        console.log("\nmetamaskWindow = page\n");
         metamaskWindow = page;
       }
     }

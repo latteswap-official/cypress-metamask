@@ -279,8 +279,8 @@ module.exports = {
 
     await puppeteer.init();
     await puppeteer.assignWindows();
+    console.log("\nBefore:waitForTimeout\n");
     await puppeteer.metamaskWindow().waitForTimeout(1000);
-    // console.log("\nRPC_URL: ",puppeteer.metamaskWindow().RPC_URL);
     await puppeteer.metamaskWindow().bringToFront()
     if (
       (await puppeteer.metamaskWindow().$(unlockPageElements.unlockPage)) ===
