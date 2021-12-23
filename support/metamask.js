@@ -213,8 +213,8 @@ module.exports = {
     console.log()
     console.log("\nacceptAccess 1");
     const notificationPage = await puppeteer.switchToMetamaskNotification();
-    await puppeteer.waitXpathAndClick(
-      confirmPageElements.confirmXpathButton,
+    await puppeteer.waitAndClick(
+      notificationPageElements.nextButton,
       notificationPage,
     );
     console.log("\nacceptAccess 2");
