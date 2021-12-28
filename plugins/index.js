@@ -136,12 +136,12 @@ module.exports = (on, config) => {
     async setupMetamask({ secretWords, network, password }) {
       console.log("\nstart setup metamask");
       console.log("\npuppeteer.metamaskWindow():",puppeteer.metamaskWindow());
-      // if (puppeteer.metamaskWindow()) {
-      //   console.log("\nif puppeteer.metamaskWindow");
-      //   await puppeteer.switchToCypressWindow();
-      //   return true
-      // } 
-      // else {
+      if (puppeteer.metamaskWindow()) {
+        console.log("\nif puppeteer.metamaskWindow");
+        await puppeteer.switchToCypressWindow();
+        return true
+      } 
+      else {
         console.log("\nelse puppeteer.metamaskWindow");
         if (process.env.NETWORK_NAME) {
           network = process.env.NETWORK_NAME;
@@ -154,7 +154,7 @@ module.exports = (on, config) => {
         }
         await metamask.initialSetup({ secretWords, network, password });
         return true;
-      // }
+      }
     },
 
     async changeAccount(number) {

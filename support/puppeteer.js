@@ -41,9 +41,9 @@ module.exports = {
     console.log('before waiting 2');
     await delay(3000);
     console.log('after waiting 2');
-    console.log('\n@@@@@@ pages @@@@@',pages);
+    // console.log('\n@@@@@@ pages @@@@@',pages);
     for (const page of pages) {
-      console.log('\n#### page #####',page);
+      // console.log('\n#### page #####',page);
       if (page.url().includes('integration')) {
         console.log("\nmainWindow = page\n");
         mainWindow = page;
