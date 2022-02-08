@@ -125,6 +125,15 @@ module.exports = {
       await puppeteer.waitAndClick(
         mainPageElements.networkSwitcher.networkButton(5),
       );
+    } else if (network === 'ftm') {
+      await puppeteer.waitAndClickByText(
+        mainPageElements.americanoNetworkSwitcher.networkButton(process.env.FTM_NETWORK_NAME),
+      );
+    } else if (network === 'bsc') {
+      console.log(network);
+      await puppeteer.waitAndClickByText(
+        mainPageElements.americanoNetworkSwitcher.networkButton(process.env.NETWORK_NAME),
+      );
     } else if (typeof network === 'object') {
       await puppeteer.waitAndClickByText(
         mainPageElements.networkSwitcher.dropdownMenuItem,
@@ -151,6 +160,27 @@ module.exports = {
 
     return true;
   },
+
+async addFTMNetwork(network) {
+  if (
+    process.env.FTM_NETWORK_NAME &&
+    process.env.FTM_RPC_URL &&
+    process.env.FTM_CHAIN_ID
+  ) {
+    network = {
+      networkName: process.env.FTM_NETWORK_NAME,
+      rpcUrl: process.env.FTM_RPC_URL,
+      chainId: process.env.FTM_CHAIN_ID,
+      symbol: process.env.FTM_SYMBOL,
+      blockExplorer: process.env.BLOCK_EXPLORER,
+      isTestnet: process.env.IS_TESTNET,
+    };
+  }
+  console.log("add FTM Network inprogress")
+  await module.exports.inputNetworkInfo(network);
+  return true;
+},
+
   async addNetwork(network) {
     if (
       process.env.NETWORK_NAME &&
@@ -166,6 +196,12 @@ module.exports = {
         isTestnet: process.env.IS_TESTNET,
       };
     }
+    await module.exports.inputNetworkInfo(network);
+    return true;
+  },
+
+  async inputNetworkInfo(network) {
+    console.log("add FTM Network inprogress")
     await puppeteer.waitAndClick(mainPageElements.accountMenu.button);
     await puppeteer.waitAndClick(mainPageElements.accountMenu.settingsButton);
     await puppeteer.waitAndClick(mainPageElements.settingsPage.networksButton);
@@ -184,14 +220,14 @@ module.exports = {
       mainPageElements.addNetworkPage.chainIdInputXpath,
       network.chainId,
     );
-
+  
     if (network.symbol) {
       await puppeteer.waitXpathAndType(
         mainPageElements.addNetworkPage.symbolInputXpath,
         network.symbol,
       );
     }
-
+  
     if (network.blockExplorer) {
       await puppeteer.waitXpathAndType(
         mainPageElements.addNetworkPage.blockExplorerInputXpath,
@@ -291,6 +327,8 @@ module.exports = {
       if (isCustomNetwork) {
         console.log("\naddNetwork new custom network");
         await module.exports.addNetwork(network);
+        console.log("before add FTM Network")
+        await module.exports.addFTMNetwork(network);
       } else {
         console.log("\nchangeNetwork");
         await module.exports.changeNetwork(network);

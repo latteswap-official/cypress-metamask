@@ -1,6 +1,6 @@
 const notificationPage = '.notification';
-const nextButton = `${notificationPage} .permissions-connect-choose-account__bottom-buttons button:nth-child(2)`;
-
+// const nextButton = `${notificationPage} button[class="button btn--rounded btn-primary page-container__footer-button"]`;
+const nextButton = `${notificationPage} button[class="button btn--rounded btn-primary"]`;
 const permissionsPage = '.permissions-connect';
 const connectButton = `${permissionsPage} .permission-approval-container__footers button:nth-child(2)`;
 

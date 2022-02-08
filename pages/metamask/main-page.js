@@ -5,6 +5,14 @@ const networkSwitcher = {
   networkButton: number => `.dropdown-menu-item:nth-child(${3 + number})`,
 };
 
+const americanoNetworkSwitcher = {
+  button: '.network-display',
+  networkName: '.typography',
+  dropdownMenuItem: '.dropdown-menu-item',
+  networkButton: networkName => `//span[@class="network-name-item" and contains(.,"${networkName}")]`,
+};
+
+
 const walletOverview = '.wallet-overview';
 const popup = {
   container: '.popover-container',
@@ -57,6 +65,7 @@ const accountModal = {
 };
 
 module.exports.mainPageElements = {
+  americanoNetworkSwitcher,
   networkSwitcher,
   walletOverview,
   popup,

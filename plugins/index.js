@@ -106,11 +106,22 @@ module.exports = (on, config) => {
       return networkAdded;
     },
     async changeMetamaskNetwork(network) {
-      if (process.env.NETWORK_NAME) {
+      if(network==='bsc'){
+        console.log("connect to bsc");
         network = process.env.NETWORK_NAME;
-      } else {
-        network = 'kovan';
       }
+      else if(network==='ftm'){
+        console.log("connect to ftm");
+        network = process.env.FTM_NETWORK_NAME;
+      }
+      else{
+        console.log("network not bsc or ftm");
+      }
+      // if (process.env.NETWORK_NAME) {
+      //   network = process.env.NETWORK_NAME;
+      // } else {
+      //   network = 'kovan';
+      // }
       const networkChanged = await metamask.changeNetwork(network);
       return networkChanged;
     },
@@ -170,6 +181,10 @@ module.exports = (on, config) => {
     },
     async addNetwork() {
       const network = metamask.addNetwork();
+      return network;
+    },
+    async addFTMNetwork() {
+      const network = metamask.addFTMNetwork();
       return network;
     }
   });
