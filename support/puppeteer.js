@@ -41,14 +41,12 @@ module.exports = {
     console.log('before waiting 2');
     await delay(3000);
     console.log('after waiting 2');
-    // console.log('\n@@@@@@ pages @@@@@',pages);
     for (const page of pages) {
-      // console.log('\n#### page #####',page);
       if (page.url().includes('integration')) {
-        console.log("\nmainWindow = page\n");
+        // console.log("\nmainWindow = page\n");
         mainWindow = page;
       } else if (page.url().includes('extension')) {
-        console.log("\nmetamaskWindow = page\n");
+        // console.log("\nmetamaskWindow = page\n");
         metamaskWindow = page;
       }
     }
@@ -112,6 +110,7 @@ module.exports = {
   },
 
   async waitAndClickByText(selector, elementText, page = metamaskWindow) {
+    console.log("selector:", selector, "elementText:", elementText);
     await module.exports.waitFor(selector, page);
     await page.evaluate(
       ({ elementText, selector }) => {

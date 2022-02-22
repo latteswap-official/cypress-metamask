@@ -106,23 +106,9 @@ module.exports = (on, config) => {
       return networkAdded;
     },
     async changeMetamaskNetwork(network) {
-      if(network==='bsc'){
-        console.log("connect to bsc");
-        network = process.env.NETWORK_NAME;
-      }
-      else if(network==='ftm'){
-        console.log("connect to ftm");
-        network = process.env.FTM_NETWORK_NAME;
-      }
-      else{
-        console.log("network not bsc or ftm");
-      }
-      // if (process.env.NETWORK_NAME) {
-      //   network = process.env.NETWORK_NAME;
-      // } else {
-      //   network = 'kovan';
-      // }
+      await puppeteer.switchToMetamaskWindow();
       const networkChanged = await metamask.changeNetwork(network);
+      await puppeteer.switchToCypressWindow();
       return networkChanged;
     },
     async acceptMetamaskAccess() {

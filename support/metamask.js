@@ -100,6 +100,7 @@ module.exports = {
 
   async changeNetwork(network) {
     setNetwork(network);
+    console.log("Network is:",network);
     await puppeteer.waitAndClick(mainPageElements.networkSwitcher.button);
     if (network === 'main' || network === 'mainnet') {
       await puppeteer.waitAndClick(
@@ -126,14 +127,17 @@ module.exports = {
         mainPageElements.networkSwitcher.networkButton(5),
       );
     } else if (network === 'ftm') {
-      await puppeteer.waitAndClickByText(
-        mainPageElements.americanoNetworkSwitcher.networkButton(process.env.FTM_NETWORK_NAME),
+      const string = mainPageElements.networkSwitcher.networkNameXpath
+      await puppeteer.waitXpathAndClick(
+        string.replace(/networkName/g,process.env.FTM_NETWORK_NAME)
       );
+    
     } else if (network === 'bsc') {
-      console.log(network);
-      await puppeteer.waitAndClickByText(
-        mainPageElements.americanoNetworkSwitcher.networkButton(process.env.NETWORK_NAME),
+      const string = mainPageElements.networkSwitcher.networkNameXpath
+      await puppeteer.waitXpathAndClick(
+        string.replace(/networkName/g,process.env.NETWORK_NAME)
       );
+     
     } else if (typeof network === 'object') {
       await puppeteer.waitAndClickByText(
         mainPageElements.networkSwitcher.dropdownMenuItem,
@@ -145,19 +149,6 @@ module.exports = {
         network,
       );
     }
-
-    if (typeof network === 'object') {
-      await puppeteer.waitForText(
-        mainPageElements.networkSwitcher.networkName,
-        network.networkName,
-      );
-    } else {
-      await puppeteer.waitForText(
-        mainPageElements.networkSwitcher.networkName,
-        network,
-      );
-    }
-
     return true;
   },
 
