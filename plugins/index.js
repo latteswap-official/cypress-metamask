@@ -115,6 +115,12 @@ module.exports = (on, config) => {
       const accepted = await metamask.acceptAccess();
       return accepted;
     },
+
+    async approveTokenMetamaskAccessFirstTime() {
+      const accepted = await metamask.approveTokenFirstTime();
+      return accepted;
+    },
+    
     async confirmMetamaskTransaction() {
       const confirmed = await metamask.confirmTransaction();
       return confirmed;

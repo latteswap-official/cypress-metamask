@@ -1,5 +1,5 @@
 const notificationPage = '.notification';
-// const nextButton = `${notificationPage} button[class="button btn--rounded btn-primary page-container__footer-button"]`;
+const confirmTokenButton = `${notificationPage} button[class="button btn--rounded btn-primary page-container__footer-button"]`;
 const nextButton = `${notificationPage} button[class="button btn--rounded btn-primary"]`;
 const permissionsPage = '.permissions-connect';
 const connectButton = `${permissionsPage} .permission-approval-container__footers button:nth-child(2)`;
@@ -26,6 +26,7 @@ module.exports.permissionsPageElements = {
 };
 
 module.exports.confirmPageElements = {
+  confirmTokenButton,
   notificationPage,
   confirmPageHeader,
   confirmPageContent,

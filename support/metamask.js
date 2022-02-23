@@ -235,9 +235,22 @@ async addFTMNetwork(network) {
     console.log("\nAfter wait for text")
     return true;
   },
+
+  async approveTokenFirstTime() {
+    await puppeteer.metamaskWindow().waitForTimeout(3000);
+    console.log("\napproveToken 1");
+    const notificationPage = await puppeteer.switchToMetamaskNotification();
+    await puppeteer.waitAndClick(
+      notificationPageElements.confirmTokenButton,
+      notificationPage,
+    );
+    console.log("\napproveToken 2");
+    await puppeteer.metamaskWindow().waitForTimeout(3000);
+    return true;
+  },
+
   async acceptAccess() {
     await puppeteer.metamaskWindow().waitForTimeout(3000);
-    console.log()
     console.log("\nacceptAccess 1");
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     await puppeteer.waitAndClick(

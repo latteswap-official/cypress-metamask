@@ -50,6 +50,10 @@ Cypress.Commands.add('acceptMetamaskAccess', () => {
   return cy.task('acceptMetamaskAccess');
 });
 
+Cypress.Commands.add('approveTokenMetamaskAccessFirstTime', () => {
+  return cy.task('approveTokenMetamaskAccessFirstTime');
+});
+
 Cypress.Commands.add('confirmMetamaskTransaction', () => {
   return cy.task('confirmMetamaskTransaction');
 });
