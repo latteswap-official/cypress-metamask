@@ -42,7 +42,7 @@ module.exports = {
     await delay(3000);
     console.log('after waiting 2');
     for (const page of pages) {
-      if (page.url().includes('integration')) {
+      if (page.url().includes('specs')) {
         // console.log("\nmainWindow = page\n");
         mainWindow = page;
       } else if (page.url().includes('extension')) {
@@ -75,6 +75,7 @@ module.exports = {
     let pages = await puppeteerBrowser.pages();
     for (const page of pages) {
       if (page.url().includes('notification')) {
+        console.log("\npage include notification")
         await page.bringToFront();
         return page;
       }

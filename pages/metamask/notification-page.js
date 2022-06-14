@@ -18,6 +18,7 @@ const confirmXpathButton = '//button[(.="Next")]'
 module.exports.notificationPageElements = {
   notificationPage,
   nextButton,
+  confirmTokenButton,
 };
 
 module.exports.permissionsPageElements = {
