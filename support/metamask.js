@@ -263,6 +263,14 @@ async addFTMNetwork(network) {
       notificationPage,
     );
     console.log("\nacceptAccess 3");
+    try{
+      await puppeteer.waitAndClick(
+        notificationPageElements.nextButton,
+        notificationPage,
+      ); 
+    }catch(e){
+      console.log(e);
+    }
     await puppeteer.metamaskWindow().waitForTimeout(3000);
     return true;
   },
